@@ -1,0 +1,59 @@
+.deck {
+  width: 320px;
+  padding: 12px;
+  font-family: system-ui, sans-serif;
+  background: #1a1a1a;
+  color: #eee;
+}
+
+h1 {
+  font-size: 15px;
+  margin: 0 0 10px;
+  color: #fff;
+}
+
+.segment-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.segment {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 10px;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.segment.selected {
+  background: #2d3f5f;
+  border-left: 3px solid #5b9bff;
+  font-weight: bold;
+}
+
+.label { white-space: nowrap; }
+
+.preview {
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copied {
+  background: #2d5f3f;
+  color: #9fe0b0;
+  padding: 6px 10px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.hint {
+  margin-top: 10px;
+  font-size: 11px;
+  color: #777;
+}
