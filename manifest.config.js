@@ -7,7 +7,7 @@ export default {
   permissions: ["storage"],
   commands: {
     _execute_action: {
-      suggested_key: { default: "Ctrl+Shift+Y", mac: "Command+Shift+Y" },
+      suggested_key: { default: "Ctrl+Shift+X", mac: "Command+Shift+Y" },
       description: "Open Snippet Deck"
     }
   }
