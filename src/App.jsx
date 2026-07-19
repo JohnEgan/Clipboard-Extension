@@ -1,18 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
-/*
-Swap the hardcoded array for state. Change SEGMENTS from a const to a useState, starting empty: const [segments, setSegments] = useState([]).
-Load on mount. Write a useEffect that reads chrome.storage.local.get('segments') and calls setSegments with what comes back. Handle the empty first-run case.
-
-~~~
-To add an item immutably: setSegments([...segments, newSegment]) — spread the old array, tack the new one on. React won't re-render if you .push() the existing array; it needs a new array reference.
-Give each new segment an id: crypto.randomUUID().
-Controlled input: <input value={label} onChange={e => setLabel(e.target.value)} /> with const [label, setLabel] = useState('') behind it.
-No <form> tags — just a button with onClick. (Forms cause a page reload that breaks things in a popup.)
-*/
-
-// Hardcoded for Part 1. Real editable segments come in Part 2.
+// Hardcoded nonsense 
 /*
 const SEGMENTS = [
   { id: '1', label: 'Email',      value: 'john@example.com' },
