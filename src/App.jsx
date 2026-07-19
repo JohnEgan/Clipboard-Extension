@@ -27,22 +27,30 @@ function App() {
   const [segments, setSegments] = useState([])
   const [userInputLabel, setUserInputLabel] = useState('')
   const [userInputValue, setUserInputValue] = useState('')
+  const [userInputCategory, setUserInputCategory] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [copied, setCopied] = useState(false)
 
   const [loaded, setLoaded] = useState(false);
 
+  const categoryNames = [...new Set(segments.map(s=>s.category))];
+
   function addUserTextInputToList() {
-      if(!userInputLabel || !userInputValue){
+      if(!userInputLabel || !userInputValue || !userInputCategory){
         return;
       }
 
-      const newSegment = {id: crypto.randomUUID(), label: userInputLabel, value: userInputValue}
+      const newSegment = {id: crypto.randomUUID(), label: userInputLabel, value: userInputValue, category: userInputCategory}
 
       setSegments([...segments, newSegment])
       setUserInputLabel('');
-      setUserInputValue('')
+      setUserInputValue('');
+      setUserInputCategory('');
 
+  }
+
+  function removeSegment(idToRemove){
+    setSegments(prev => prev.filter(segment => segment.id !== idToRemove))
   }
 
   useEffect(() => {
@@ -85,18 +93,36 @@ function App() {
       <h1>Copy Extension Thing</h1>
       {copied && <div className="copied">Copied!</div>}
       <ul className="segment-list">
-        {segments.map((seg, i) => (
-          <li
-            key={seg.id}
-            className={i === selectedIndex ? 'segment selected' : 'segment'}
-            onClick={() => setSelectedIndex(i)}
-          >
-            <span className="label">{seg.label}</span>
-            <span className="preview">{seg.value}</span>
+        {categoryNames.map(cat => (
+          <li key={cat}>
+            <div className='category-header'>{cat}</div>
+            <ul>
+              {segments
+              .filter(seg =>seg.category === cat)
+              .map(seg => (
+              <li 
+                key={seg.id} 
+                className="segment" 
+                onClick={() => {
+                navigator.clipboard.writeText(seg.value)
+                setCopied(true)
+                setTimeout(() => window.close(), 500)
+              }}>
+                <span className="label">{seg.label}</span>
+                <span className="preview">{seg.value}</span>
+                <button onClick={() => removeSegment(seg.id)}>Delete</button>
+              </li>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>
       <div>
+        <input
+          value={userInputCategory}
+          onChange={e => setUserInputCategory(e.target.value)}
+          placeholder="Category"
+        />
         <input
           value={userInputLabel}
           onChange={e => setUserInputLabel(e.target.value)}
@@ -115,3 +141,34 @@ function App() {
 }
 
 export default App
+
+/*
+
+<ul className="segment-list">
+        {segments.map((seg, i) => (
+          <li
+            key={seg.id}
+            className={i === selectedIndex ? 'segment selected' : 'segment'}
+            onClick={() => setSelectedIndex(i)}
+          >
+            <span className="label">{seg.label}</span>
+            <span className="preview">{seg.value}</span>
+            <button onClick={() => removeSegment(seg.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+      <div>
+        <input
+          value={userInputLabel}
+          onChange={e => setUserInputLabel(e.target.value)}
+          placeholder="Label"
+        />
+        <textarea
+          value={userInputValue}
+          onChange={e => setUserInputValue(e.target.value)}
+          placeholder="Paste Text Here"
+        />
+        <button onClick={addUserTextInputToList}>Add To List</button>
+      </div>
+
+*/
