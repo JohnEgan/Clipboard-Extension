@@ -28,7 +28,7 @@ function App() {
   console.log('storage exists?', chrome.storage)
   chrome.storage.local.get('segments').then(r => console.log('READ:', r))
 
-   const [segments, setSegments] = useState([])
+  const [segments, setSegments] = useState([])
   const [userInputLabel, setUserInputLabel] = useState('')
   const [userInputValue, setUserInputValue] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(0)
