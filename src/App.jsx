@@ -22,17 +22,15 @@ const SEGMENTS = [
 ]
 */
 
-
 function App() {
-
-  console.log('storage exists?', chrome.storage)
-  chrome.storage.local.get('segments').then(r => console.log('READ:', r))
 
   const [segments, setSegments] = useState([])
   const [userInputLabel, setUserInputLabel] = useState('')
   const [userInputValue, setUserInputValue] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [copied, setCopied] = useState(false)
+
+  const [loaded, setLoaded] = useState(false);
 
   function addUserTextInputToList() {
       if(!userInputLabel || !userInputValue){
@@ -49,6 +47,7 @@ function App() {
 
   useEffect(() => {
     chrome.storage.local.get('segments').then(result => {
+      setLoaded(true)
       if(result.segments){
         setSegments(result.segments)
       }
@@ -56,8 +55,9 @@ function App() {
   }, [])
 
   useEffect(() => {
+    if (!loaded) return
     chrome.storage.local.set({segments})
-  }, [segments])
+  }, [segments, loaded])
 
   useEffect(() => {
     function handleKey(e) {
