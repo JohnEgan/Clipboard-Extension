@@ -24,6 +24,10 @@ const SEGMENTS = [
 
 
 function App() {
+
+  console.log('storage exists?', chrome.storage)
+  chrome.storage.local.get('segments').then(r => console.log('READ:', r))
+
    const [segments, setSegments] = useState([])
   const [userInputLabel, setUserInputLabel] = useState('')
   const [userInputValue, setUserInputValue] = useState('')
@@ -42,6 +46,18 @@ function App() {
       setUserInputValue('')
 
   }
+
+  useEffect(() => {
+    chrome.storage.local.get('segments').then(result => {
+      if(result.segments){
+        setSegments(result.segments)
+      }
+    })
+  }, [])
+
+  useEffect(() => {
+    chrome.storage.local.set({segments})
+  }, [segments])
 
   useEffect(() => {
     function handleKey(e) {
