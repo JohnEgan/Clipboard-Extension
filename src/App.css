@@ -1,59 +1,48 @@
-.deck {
-  width: 320px;
-  padding: 12px;
-  font-family: system-ui, sans-serif;
-  background: #1a1a1a;
-  color: #eee;
-}
-
-h1 {
-  font-size: 15px;
-  margin: 0 0 10px;
-  color: #fff;
-}
-
-.segment-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.segment {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 8px 10px;
-  border-left: 3px solid transparent;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.segment.selected {
-  background: #2d3f5f;
-  border-left: 3px solid #5b9bff;
+.category-header {
+  font-size: 13px;
   font-weight: bold;
+  color: #5b9bff;
+  margin: 14px 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.label { white-space: nowrap; }
-
-.preview {
-  color: #999;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.copied {
-  background: #2d5f3f;
-  color: #9fe0b0;
-  padding: 6px 10px;
+input,
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 4px 0;
+  padding: 6px 8px;
+  background: #262626;
+  color: #eee;
+  border: 1px solid #3a3a3a;
   border-radius: 4px;
-  margin-bottom: 8px;
+  font-family: inherit;
   font-size: 13px;
 }
 
-.hint {
-  margin-top: 10px;
-  font-size: 11px;
-  color: #777;
+textarea {
+  resize: vertical;
+  min-height: 40px;
+}
+
+button {
+  margin: 4px 0;
+  padding: 6px 10px;
+  background: #2d3f5f;
+  color: #eee;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+button:hover {
+  background: #3a5178;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
