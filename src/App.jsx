@@ -59,11 +59,14 @@ function App() {
   }
 
   useEffect(() => {
-    chrome.storage.local.get('segments').then(result => {
-      setLoaded(true)
+    chrome.storage.local.get(['segments', 'categories']).then(result => {
       if(result.segments){
         setSegments(result.segments)
       }
+      if(result.categories){
+        setCategories(result.categories)
+      }
+      setLoaded(true)
     })
   }, [])
 
@@ -71,6 +74,11 @@ function App() {
     if (!loaded) return
     chrome.storage.local.set({segments})
   }, [segments, loaded])
+
+  useEffect(() => {
+    if (!loaded) return
+    chrome.storage.local.set({categories})
+  }, [categories, loaded])
 
   /*
   TODO come back to this later 
