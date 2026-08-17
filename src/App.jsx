@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import CategoryBlock from '../components/CategoryBlock'
 import './App.css'
 
 // Hardcoded nonsense 
@@ -16,8 +17,8 @@ function App() {
   const [displayState, setDisplayState] = useState("edit")
 
   const [segments, setSegments] = useState([])
-  const [userInputLabel, setUserInputLabel] = useState('')
-  const [userInputValue, setUserInputValue] = useState('')
+  //const [userInputLabel, setUserInputLabel] = useState('')
+  //const [userInputValue, setUserInputValue] = useState('')
   const [userInputCategory, setUserInputCategory] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [copied, setCopied] = useState(false)
@@ -29,12 +30,13 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [currentCategory, setCurrentCategory] = useState("");
 
-  function addUserTextInputToList(cat) {
-      if(!userInputLabel || !userInputValue){
+  //takes in two values from the category now?
+  function addUserTextInputToList(cat, label, value) {
+      if(!label || !value){
         return;
       }
 
-      const newSegment = {id: crypto.randomUUID(), label: userInputLabel, value: userInputValue, category: cat}
+      const newSegment = {id: crypto.randomUUID(), label: label, value: value, category: cat}
 
       //TODO
       //this is a dunb way of saving these to fetch them to render
@@ -42,8 +44,6 @@ function App() {
       // use an array of objects for the category
       // {categoryName: "name", segmentArray: null}
       setSegments([...segments, newSegment])
-      setUserInputLabel('');
-      setUserInputValue('');
 
   }
 
@@ -109,38 +109,17 @@ function App() {
       {copied && <div className="copied">Copied!</div>}
       {
         categories.map(cat => (
-          <li key={cat}>
-          <div className='category-header'>{cat}</div>
-          <ul>
-              {segments
-              .filter(seg =>seg.category === cat)
-              .map(seg => (
-              <li 
-                key={seg.id} 
-                className="segment" 
-                onClick={() => {
-                navigator.clipboard.writeText(seg.value)
-                setCopied(true)
-                setTimeout(() => window.close(), 500)
-              }}>
-                <span className="label">{seg.label}</span>
-                <span className="preview">{seg.value}</span>
-                <button onClick={() => removeSegment(seg.id)}>Delete</button>
-              </li>
-              ))}
-            </ul>
-          <input
-            value={userInputLabel}
-            onChange={e => setUserInputLabel(e.target.value)}
-            placeholder="Label"
+
+          <CategoryBlock
+            key = {cat}
+            category = {cat}
+            segments = {segments.filter(seg =>seg.category === cat)}
+            onAdd={addUserTextInputToList}
+            onRemove={removeSegment}
+            onCopy={() => setCopied(true)}
           />
-          <textarea
-            value={userInputValue}
-            onChange={e => setUserInputValue(e.target.value)}
-            placeholder="Paste Text Here"
-          />
-          <button onClick={() => addUserTextInputToList(cat)}>Add To List</button>
-          </li>
+
+          
         ))
       }
       <div>
