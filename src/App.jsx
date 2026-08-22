@@ -30,6 +30,9 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [currentCategory, setCurrentCategory] = useState("");
 
+  //have this be a const value??
+  const [appState, setAppState] = useState("edit");
+
   //takes in two values from the category now?
   function addUserTextInputToList(cat, label, value) {
       if(!label || !value){
@@ -104,8 +107,10 @@ function App() {
   }, [selectedIndex, segments])
 */
 
+//TODO syntax is wring 
   return (
     <div className="deck">
+    {(appState === "edit") && 
       {copied && <div className="copied">Copied!</div>}
       {
         categories.map(cat => (
@@ -131,6 +136,7 @@ function App() {
         <button onClick={addCategoryToList}>Add Category</button>
       </div>
     </div>
+    }
   )
 }
 
