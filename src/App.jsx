@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import CategoryBlock from '../components/CategoryBlock'
 import './App.css'
 import EditMode from '../components/EditMode';
+import CopyMode from '../components/CopyMode';
 
 // Hardcoded nonsense 
 /*
@@ -105,20 +106,29 @@ function App() {
   }, [selectedIndex, segments])
 */
 
+function switchAppState(){
+  setAppState(appState === 'edit' ? 'copy' : 'edit')
+}
 
+//{mode === 'edit' ? <EditMode .../> : <CopyMode .../>}.
   return (
     <div className="deck">
+      <button onClick={() => switchAppState()}>Switch State</button>
       {copied && <div className="copied">Copied!</div>}
-      <EditMode 
-      categories = {categories}
-      segments = {segments}
-      onAdd={addUserTextInputToList}
-      onRemove={removeSegment}
-      onAddCategory={addCategoryToList}
-      onDeleteCategory={deleteCategory}
-      ></EditMode>
-
-      
+      {appState === 'edit'
+        ? <EditMode
+          categories={categories}
+          segments={segments}
+          onAdd={addUserTextInputToList}
+          onRemove={removeSegment}
+          onAddCategory={addCategoryToList}
+          onDeleteCategory={deleteCategory}
+        />
+        : <CopyMode
+          categories={categories}
+          segments={segments}
+        />
+      }
     </div>
   )
 }
