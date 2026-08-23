@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import CategoryBlock from '../components/CategoryBlock'
 import './App.css'
+import EditMode from '../components/EditMode';
 
 // Hardcoded nonsense 
 /*
@@ -14,22 +15,14 @@ const SEGMENTS = [
 
 function App() {
 
-  const [displayState, setDisplayState] = useState("edit")
-
   const [segments, setSegments] = useState([])
-  //const [userInputLabel, setUserInputLabel] = useState('')
-  //const [userInputValue, setUserInputValue] = useState('')
-  const [userInputCategory, setUserInputCategory] = useState('');
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  
   const [copied, setCopied] = useState(false)
 
   const [loaded, setLoaded] = useState(false);
 
- // const categoryNames = [...new Set(segments.map(s=>s.category))];
-
   const [categories, setCategories] = useState([]);
-  const [currentCategory, setCurrentCategory] = useState("");
-
+  
   //have this be a const value??
   const [appState, setAppState] = useState("edit");
 
@@ -50,11 +43,16 @@ function App() {
 
   }
 
-  function addCategoryToList(){
-    if(!userInputCategory){
+  function deleteCategory(categoryName){
+    setCategories(prev => prev.filter(c => c !== categoryName))
+    setSegments(prev => prev.filter(seg => seg.category !== categoryName))
+  }
+
+  function addCategoryToList(categoryNameToAdd){
+    if(!categoryNameToAdd){
       return;
     }
-    setCategories([...categories, userInputCategory])
+    setCategories([...categories, categoryNameToAdd])
   }
 
   function removeSegment(idToRemove){
@@ -107,36 +105,21 @@ function App() {
   }, [selectedIndex, segments])
 */
 
-//TODO syntax is wring 
+
   return (
     <div className="deck">
-    {(appState === "edit") && 
       {copied && <div className="copied">Copied!</div>}
-      {
-        categories.map(cat => (
+      <EditMode 
+      categories = {categories}
+      segments = {segments}
+      onAdd={addUserTextInputToList}
+      onRemove={removeSegment}
+      onAddCategory={addCategoryToList}
+      onDeleteCategory={deleteCategory}
+      ></EditMode>
 
-          <CategoryBlock
-            key = {cat}
-            category = {cat}
-            segments = {segments.filter(seg =>seg.category === cat)}
-            onAdd={addUserTextInputToList}
-            onRemove={removeSegment}
-            onCopy={() => setCopied(true)}
-          />
-
-          
-        ))
-      }
-      <div>
-        <input
-          value={userInputCategory}
-          onChange={e => setUserInputCategory(e.target.value)}
-          placeholder="Category"
-        />
-        <button onClick={addCategoryToList}>Add Category</button>
-      </div>
+      
     </div>
-    }
   )
 }
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function CategoryBlock({ category, segments, onAdd, onRemove, onCopy }){
+function CategoryBlock({ category, segments, onAdd, onRemove, onDeleteCategory}){
     
     const [label, setLabel] = useState('');
     const [value, setValue] = useState('');
@@ -11,23 +11,31 @@ function CategoryBlock({ category, segments, onAdd, onRemove, onCopy }){
         setValue('');
     }
 
-    return(
-        <li>
-        <div className='category-header'>{category}</div>
-        <ul>
-            
-            {segments.map(seg => (
-            <li 
-                key={seg.id} 
-                className="segment" 
-                onClick={() => {
+    /*
+
+    onClick={() => {
                 navigator.clipboard.writeText(seg.value)
                 onCopy()
                 setTimeout(() => window.close(), 500)
-              }}>
+              }}
+
+    this was here but removed it might need to refrence it later?
+
+    */
+
+    return(
+        <li>
+        <div className='category-header'>{category}</div>
+        <button onClick={() => {
+            if (confirm(`Delete "${category}" and its snippets?`)) onDeleteCategory(category)
+        }}>Delete Category</button>
+        <ul>
+            
+            {segments.map(seg => (
+            <li key={seg.id} className="segment" >
                 <span className="label">{seg.label}</span>
                 <span className="preview">{seg.value}</span>
-                <button onClick={(e) => { e.stopPropagation(); onRemove(seg.id) }}>Delete</button>
+                <button onClick={(e) => {onRemove(seg.id) }}>Delete</button>
             </li>
             
             ))}
