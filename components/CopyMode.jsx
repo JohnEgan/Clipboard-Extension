@@ -34,11 +34,14 @@ function CopyMode({categories, segments}) {
         return () => window.removeEventListener('keydown', handleKey)
     }, [catIndex, categories, segments, segIndex])
 
+    if(!currentSegs[segIndex]){
+        return <div>No Data Yet Switch To Edit mode</div>
+    }
+
     return(
         <div>
-            <h1>copy mode</h1>   
-            <h1>{currentCat}</h1>
-            <h1>{currentSegs[segIndex].value}</h1>
+            <div>{currentCat}</div>
+            <div>{currentSegs[segIndex].value}</div>
         </div>
     )
 }

@@ -25,7 +25,7 @@ function App() {
   const [categories, setCategories] = useState([]);
   
   //have this be a const value??
-  const [appState, setAppState] = useState("edit");
+  const [appState, setAppState] = useState("copy");
 
   //takes in two values from the category now?
   function addUserTextInputToList(cat, label, value) {
