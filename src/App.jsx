@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import CategoryBlock from '../components/CategoryBlock'
 import './App.css'
 import EditMode from '../components/EditMode';
 import CopyMode from '../components/CopyMode';
@@ -76,6 +75,11 @@ function switchAppState(){
   setAppState(appState === 'edit' ? 'copy' : 'edit')
 }
 
+function onCopy(){
+  setCopied(true);
+  setTimeout(() => window.close(), 500)
+}
+
   return (
     <div className="deck">
       <button onClick={() => switchAppState()}>Switch State</button>
@@ -92,6 +96,7 @@ function switchAppState(){
         : <CopyMode
           categories={categories}
           segments={segments}
+          onCopy={onCopy}
         />
       }
     </div>
