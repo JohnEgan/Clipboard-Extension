@@ -11,18 +11,6 @@ function CategoryBlock({ category, segments, onAdd, onRemove, onDeleteCategory})
         setValue('');
     }
 
-    /*
-
-    onClick={() => {
-                navigator.clipboard.writeText(seg.value)
-                onCopy()
-                setTimeout(() => window.close(), 500)
-              }}
-
-    this was here but removed it might need to refrence it later?
-
-    */
-
     return(
         <li>
         <div className='category-header'>{category}</div>

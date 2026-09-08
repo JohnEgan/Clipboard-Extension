@@ -4,16 +4,6 @@ import './App.css'
 import EditMode from '../components/EditMode';
 import CopyMode from '../components/CopyMode';
 
-// Hardcoded nonsense 
-/*
-const SEGMENTS = [
-  { id: '1', label: 'Email',      value: 'john@example.com' },
-  { id: '2', label: 'Phone',      value: '555-123-4567' },
-  { id: '3', label: 'GitHub URL', value: 'https://github.com/yourname' },
-  { id: '4', label: 'LinkedIn',   value: 'https://linkedin.com/in/yourname' },
-]
-*/
-
 function App() {
 
   const [segments, setSegments] = useState([])
@@ -82,35 +72,10 @@ function App() {
     chrome.storage.local.set({categories})
   }, [categories, loaded])
 
-  /*
-  TODO come back to this later 
-  useEffect(() => {
-    function handleKey(e) {
-      if (e.key === 'ArrowDown') {
-        e.preventDefault()
-        setSelectedIndex(i => (i + 1) % segments.length)
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault()
-        setSelectedIndex(i => (i - 1 + segments.length) % segments.length)
-      } else if (e.key === 'Enter') {
-        e.preventDefault()
-        const segment = segments[selectedIndex]
-        if (!segment) return
-        navigator.clipboard.writeText(segment.value)
-        setCopied(true)
-        setTimeout(() => window.close(), 500)
-      }
-    }
-    window.addEventListener('keydown', handleKey)
-    return () => window.removeEventListener('keydown', handleKey)
-  }, [selectedIndex, segments])
-*/
-
 function switchAppState(){
   setAppState(appState === 'edit' ? 'copy' : 'edit')
 }
 
-//{mode === 'edit' ? <EditMode .../> : <CopyMode .../>}.
   return (
     <div className="deck">
       <button onClick={() => switchAppState()}>Switch State</button>
