@@ -1,48 +1,213 @@
+/* ============================================================
+   Snippet Deck — App.css
+   Replace your entire App.css with this file.
+   Keeps your purple accent + dark mode; drops the demo cruft.
+   ============================================================ */
+
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --text-muted: #9a94a3;
+  --bg: #ffffff;
+  --surface: #faf9fb;
+  --border: #e6e4e9;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.10);
+  --accent-border: rgba(170, 59, 255, 0.45);
+  --danger: #d64545;
+  --radius: 8px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  font: 14px/1.45 var(--sans);
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --text-muted: #6b7280;
+    --bg: #16171d;
+    --surface: #1f2028;
+    --border: #2e303a;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --danger: #f87171;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body { margin: 0; }
+
+#root {
+  width: 300px;
+  margin: 0;
+}
+
+/* ---- Layout shell ---- */
+.deck {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+}
+
+h1 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-h);
+  margin: 0;
+}
+
+/* ---- Buttons (neutral by default) ---- */
+button {
+  font: inherit;
+  font-weight: 500;
+  color: var(--text-h);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: border-color .12s ease, background .12s ease;
+}
+button:hover { border-color: var(--accent-border); }
+button:focus-visible {
+  outline: 2px solid var(--accent-border);
+  outline-offset: 1px;
+}
+
+/* Optional accent button: add className="primary" in JSX */
+button.primary {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+button.primary:hover { filter: brightness(1.05); }
+
+/* Optional destructive button: add className="danger" in JSX */
+button.danger {
+  color: var(--danger);
+  border-color: transparent;
+  background: transparent;
+  padding: 6px 8px;
+}
+button.danger:hover {
+  border-color: var(--danger);
+  background: transparent;
+}
+
+/* ---- Inputs ---- */
+input, textarea {
+  font: inherit;
+  width: 100%;
+  color: var(--text-h);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+input::placeholder, textarea::placeholder { color: var(--text-muted); }
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+textarea { min-height: 60px; resize: vertical; }
+
+/* ---- Copy mode (the everyday view) ---- */
+/* Requires classNames in CopyMode.jsx — see notes. */
+.copy-view {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.copy-cat {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.copy-value {
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--text-h);
+  word-break: break-word;
+}
+.copy-hint {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ---- Edit mode ---- */
+/* Requires className="category-block" on the <li> in CategoryBlock.jsx */
+.category-block {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
 .category-header {
   font-size: 13px;
-  font-weight: bold;
-  color: #5b9bff;
-  margin: 14px 0 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-weight: 600;
+  color: var(--text-h);
 }
-
-input,
-textarea {
-  width: 100%;
-  box-sizing: border-box;
-  margin: 4px 0;
-  padding: 6px 8px;
-  background: #262626;
-  color: #eee;
-  border: 1px solid #3a3a3a;
-  border-radius: 4px;
-  font-family: inherit;
-  font-size: 13px;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 40px;
-}
-
-button {
-  margin: 4px 0;
-  padding: 6px 10px;
-  background: #2d3f5f;
-  color: #eee;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 13px;
-}
-
-button:hover {
-  background: #3a5178;
-}
-
-ul {
+.category-block ul {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.segment {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.segment .label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+.segment .preview {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.segment button { padding: 4px 8px; font-size: 12px; }
+
+/* ---- "Copied!" banner ---- */
+.copied {
+  padding: 6px 10px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 6px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
 }

@@ -77,7 +77,7 @@ function switchAppState(){
 
 function onCopy(){
   setCopied(true);
-  setTimeout(() => window.close(), 500)
+  setTimeout(() => setCopied(false), 750)
 }
 
   return (

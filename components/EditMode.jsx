@@ -8,7 +8,6 @@ function EditMode({ categories, segments, onAdd, onRemove, onAddCategory, onDele
 
     return(
         <div>
-            <h1>Edit mode</h1>
             {
                 categories.map(cat => (
 
