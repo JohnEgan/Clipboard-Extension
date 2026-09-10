@@ -42,9 +42,9 @@ function CopyMode({categories, segments, onCopy}) {
     }
 
     return(
-        <div>
-            <div>{currentCat}</div>
-            <div>{currentSegs[segIndex].value}</div>
+        <div className="copy-view">
+            <div className="copy-cat">{currentCat}</div>
+            <div className="copy-value">{currentSegs[segIndex].value}</div>
         </div>
     )
 }
