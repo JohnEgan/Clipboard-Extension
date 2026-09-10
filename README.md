@@ -1,16 +1,25 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+# Easy Copy and Paste Chrome Extention 
 
-Currently, two official plugins are available:
+This is a Chrome extention for storing resuable text strings, anything that you find yourself pasting often, and copying them to your clipboard 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+# Insatall 
 
-## React Compiler
+1. Clone Repo
+2. `npm install`
+3. `npm run build`
+4. Go to `chrome://extensions`, enable **Developer mode**
+5. Click **Load unpacked** and select the `dist` folder
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# Usage 
 
-## Expanding the Oxlint configuration
+Open the popup from the toolbar icon (or hotkey Ctrl+Shift+X).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- Edit Mode: add categories, then add labeled text strings underneath 
+- Copy Mode: Tab between categories ('w'/'s') to move withing one, press Enter to copy
+- Text strings persist locally via chrome.storage 
+
+# Roadmap
+
+- Side panel version so the UI stays open while you paste into a page
+- User-customizable keyboard controls
